@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: linear-gradient(to right, #00b7ea 0%,#8503db 100%);
+  background-image: linear-gradient(to right, #80a9e7, #77a4e4, #6e9fe2, #659adf, #5b95dc);
 }
 
 code {
