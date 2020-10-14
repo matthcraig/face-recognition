@@ -10,6 +10,7 @@ import Clarifai from 'clarifai';
 import FaceRecognition from './components/faceRecognition/FaceRecognition'; 
 import Signin from './components/signin/Signin';
 
+
 const app = new Clarifai.App({
   apiKey: '446202372ff345c2b452b865a9bab241'
 });
@@ -138,9 +139,27 @@ class App extends Component {
       imageUrl: '',
       box: {},
       route: "signin",
-      isSignedIn: false
+      isSignedIn: false,
+      user: {
+        id: '',
+        email: '',
+        name: '',
+        entries: 0,
+        joined: ''
+        
+      }
     }
   }
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      email: data.email,
+      name: data.name,
+      entries: data.entries,
+      joined: data.joined
+    }})
+  }
+  
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -199,7 +218,7 @@ class App extends Component {
       : (
         this.state.route === 'signin'
         ? <Signin onRouteChange={this.onRouteChange}/>
-        : <Register onRouteChange={this.onRouteChange}/>
+        : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
       )
       }
     </div>
